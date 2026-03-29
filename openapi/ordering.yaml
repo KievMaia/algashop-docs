@@ -61,3 +61,117 @@ paths:
         - Customers
       responses:
 
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "019d3b86-da4e-7028-9469-5701bc955976"
+        firsName:
+          type: string
+          example: "John"
+        lastName:
+          type: string
+          example: "Doe"
+        email:
+          type: string
+          example: "johndoe@email.com"
+        document:
+          type: string
+          example: "12345"
+        phone:
+          type: string
+          example: "1191234564"
+        birthDate:
+          type: string
+          format: date
+          example: "1987-11-05"
+        loyaltyPoints:
+          type: number
+          example: 10
+        registeredAt:
+          type: string
+          format: date-time
+          example: "2024-04-04T00:12:452Z"
+        archivedAt:
+          type: string
+          format: date-time
+          example: "2024-04-04T00:12:452Z"
+        promotionNotificationAllowed:
+          type: boolean
+          example: false
+        archived:
+          type: boolean
+          example: false
+        address:
+          $ref: "#/components/schemas/Address"
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+          example: "Bourbon Street"
+        number:
+          type: string
+          example: "2000"
+        complement:
+          type: string
+          example: "apt 122"
+        neighborhood:
+          type: string
+          example: "North Ville"
+        city:
+          type: string
+          example: "Yostfort"
+        state:
+          type: string
+          example: "South Carolina"
+        zipCode:
+          type: string
+          example: "12321"
+    CustomerInput:
+      type: object
+      properties:
+        firsName:
+          type: string
+          example: "John"
+        lastName:
+          type: string
+          example: "Doe"
+        email:
+          type: string
+          example: "johndoe@email.com"
+        document:
+          type: string
+          example: "12345"
+        phone:
+          type: string
+          example: "1191234564"
+        birthDate:
+          type: string
+          format: date
+          example: "1987-11-05"
+        promotionNotificationAllowed:
+          type: boolean
+          example: false
+        address:
+          $ref: "#/components/schemas/Address"
+    CustomerUpdateInput:
+      type: object
+      properties:
+        firsName:
+          type: string
+          example: "John"
+        lastName:
+          type: string
+          example: "Doe"
+        phone:
+          type: string
+          example: "1191234564"
+        promotionNotificationAllowed:
+          type: boolean
+          example: false
+        address:
+          $ref: "#/components/schemas/Address"
