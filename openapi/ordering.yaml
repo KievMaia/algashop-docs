@@ -183,6 +183,70 @@ paths:
           $ref: "#/components/responses/UnprocessableEntity"
         500:
           $ref: "#/components/responses/InternalError"
+    get:
+      parameters:
+        - schema:
+            type: string
+            format: date-time
+          name: orderedDateFrom
+          in: query
+          required: false
+          example: "2024-04-04T00:12:452Z"
+
+        - schema:
+            type: string
+            format: date-time
+          name: orderedDateTo
+          in: query
+          required: false
+          example: "2024-04-04T00:12:452Z"
+
+        - schema:
+            type: string
+          name: customerId
+          in: query
+          required: false
+          example: '6e148bd5-47f6-4022-b9da-07cfaa29f7a'
+
+        - schema:
+            type: number
+          name: totalAmountFrom
+          in: query
+          required: false
+          example: '100'
+
+        - schema:
+            type: number
+          name: totalAmountTo
+          in: query
+          required: false
+          example: '100'
+
+        - schema:
+            type: string
+          name: orderId
+          in: path
+          required: false
+          example: '6e148bd5-47f6-4022-b9da-07cfaa29f7a'
+
+        - schema:
+            type: string
+          name: status
+          in: query
+          required: false
+          example: "PLACED"
+      description: List orders
+      tags:
+        - Orders
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+        404:
+          $ref: "#/components/responses/NotFound"
 components:
   parameters:
     page:
@@ -770,3 +834,47 @@ components:
       enum:
         - GATEWAY_BALANCE
         - CREDIT_CARD
+    OrderSummary:
+      required:
+        - id
+        - customer
+        - paymentMethod
+        - totalItems
+        - totalAmount
+        - placedAt
+        - canceledAt
+        - paidAt
+        - readyAt
+        - status
+      properties:
+        id:
+          type: string
+          example: "01226N0640J7Q"
+        customer:
+          $ref: "#/components/schemas/CustomerMinimal"
+        totalItems:
+          type: integer
+          example: 2
+        totalAmount:
+          type: number
+          example: 41.98
+        placedAt:
+          type: string
+          format: date-time
+          example: "2024-04-04T00:12:45Z"
+        canceledAt:
+          type: string
+          format: date-time
+          example: "2024-04-04T00:12:45Z"
+        paidAt:
+          type: string
+          format: date-time
+          example: "2024-04-04T00:12:45Z"
+        readyAt:
+          type: string
+          format: date-time
+          example: "2024-04-04T00:12:45Z"
+        status:
+          $ref: "#/components/schemas/OrderStatus"
+        paymentMethod:
+          $ref: "#/components/schemas/PaymentMethod"
