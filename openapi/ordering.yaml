@@ -184,6 +184,9 @@ paths:
         500:
           $ref: "#/components/responses/InternalError"
     get:
+      description: List orders
+      tags:
+        - Orders
       parameters:
         - schema:
             type: string
@@ -235,7 +238,38 @@ paths:
           in: query
           required: false
           example: "PLACED"
-      description: List orders
+
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/size"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/direction"
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Page"
+                  - type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/OrderSummary"
+        404:
+          $ref: "#/components/responses/NotFound"
+
+  /api/v1/orders/{orderId}:
+    get:
+      parameters:
+        - schema:
+            type: string
+          name: orderId
+          in: path
+          required: true
+          example: '6e148bd5-47f6-4022-b9da-07cfaa29f7a'
+      description: Find order by id
       tags:
         - Orders
       responses:
